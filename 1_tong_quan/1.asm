@@ -1,0 +1,6 @@
+MOV AH, 80 ; AH <- 80 (AX = 5056)
+MOV AL, 86 ; AL <- 86 (AX = 5056)
+MOV BX, AX ; BX <- AX (BH = 50, BL = 56)
+MOV DH, BL ; DH <- BL (DH = 56, DX = 5650)
+MOV DL, BH ; DL <- BH (DL = 50, DX = 5650)
+MOV SI, CS ; SI <- CS (SI = 0100)
