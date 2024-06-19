@@ -5,10 +5,15 @@ inchuoi MACRO chuoi      ;tuong tu ham
 ENDM  
 
 DSEG SEGMENT
-    msg1 DB "Hay nhap so nhi phan 16 bit: $"
-    msg2 DB "So nhi phan da nhap la: $"
+    msg1 DB "Nhap so A (bin 16 bit): $"
+    msg2 DB "Nhap so B (bin 16 bit): $"
+    msg3 DB "A + B = $" 
+    msg4 DB "A - B = $"
+    msg5 DB "A and B = $"
+    msg6 DB "A or B =  $"
     xdong DB 10, 13, '$'
-    sobin dw ?  ;luu tru so nhi phan nhan duoc
+    so1 dw ? 
+    so2 dw ? 
 DSEG ENDS 
 
 CSEG SEGMENT
@@ -19,15 +24,51 @@ begin:
     
     inchuoi msg1
     CALL bin_in
-    MOV sobin, BX
+    MOV so1, BX
+    inchuoi xdong 
+
+    inchuoi msg2
+    CALL bin_in
+    MOV so2, BX
     inchuoi xdong 
     
-    inchuoi msg2
-    MOV BX, sobin
-    CALL bin_out   
+    inchuoi msg3
+    mov ax, so1
+    add ax, so2
+    mov bx, ax
+    jc overflow    ;CF = 1-> tran
+    overflow:
+        mov ah, 2
+        mov al, 31h
+        lea dl, al
+        int 21h
+    call bin_out 
+    inchuoi xdong
+     
+    inchuoi msg4
+    mov ax, so1
+    sub ax, so2
+    mov bx, ax
+    call bin_out
+    inchuoi xdong
+    
+    inchuoi msg5
+    mov ax, so1
+    and ax, so2
+    mov bx, ax
+    call bin_out
+    inchuoi xdong
+    
+    inchuoi msg6
+    mov ax, so1
+    or ax, so2 
+    mov bx, ax
+    call bin_out
+    inchuoi xdong
 
     MOV AH, 4Ch      ;ket thuc chtr
     INT 21h 
+
     
 bin_in PROC
     MOV BX, 0       ;xoa BL
