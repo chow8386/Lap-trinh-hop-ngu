@@ -58,7 +58,13 @@ hex_in PROC
             jmp done
         
         convert_chu:
-            sub al, 37h    
+            cmp al, 'Z'
+            jbe chu_hoa
+            ja chu_thuong
+            chu_hoa:
+                sub al, 37h
+            chu_thuong:
+                sub al, 57h     
         
         done:
         SHL BL, 4       

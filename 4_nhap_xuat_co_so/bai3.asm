@@ -1,12 +1,12 @@
-inchuoi MACRO chuoi      ;tuong tu ham
+        inchuoi MACRO chuoi      ;tuong tu ham
     MOV AH, 9h
     LEA DX, chuoi
     INT 21h
 ENDM  
 
 DSEG SEGMENT
-    msg1 DB "Nhap so A (bin 16 bit): $"
-    msg2 DB "Nhap so B (bin 16 bit): $"
+    msg1 DB "Nhap so A (hex 16 bit): $"
+    msg2 DB "Nhap so B (hex 16 bit): $"
     msg3 DB "A + B = $" 
     msg4 DB "A - B = $"
     msg5 DB "A and B = $"
@@ -23,14 +23,18 @@ begin:
     MOV DS, AX 
     
     inchuoi msg1
-    CALL bin_in
+    CALL hex_in
     MOV so1, BX
     inchuoi xdong 
-
+    ;call bin_out
+    ;inchuoi xdong 
+    
     inchuoi msg2
-    CALL bin_in
+    CALL hex_in
     MOV so2, BX
-    inchuoi xdong 
+    inchuoi xdong
+    ;call bin_out 
+    ;inchuoi xdong 
     
     inchuoi msg3
     mov ax, so1
@@ -69,24 +73,39 @@ begin:
     MOV AH, 4Ch      ;ket thuc chtr
     INT 21h 
 
-    
-bin_in PROC
+hex_in PROC
     MOV BX, 0       ;xoa BL
-    MOV CX, 16       ;nhap du 16 bit thi dung
+    MOV CX, 4       ;lap 2 lan de du 8 bit
     nhap:
         MOV AH, 01h     
-        INT 21h 
+        INT 21h    
         
-        CMP AL, 0Dh     ;neu la phim enter thi thoi nhap
-        JZ exit         ;neu khong phai enter thi doi sang bit  
+        cmp al, '9'
+        jbe convert_so
+        ja convert_chu
         
-        SHL BX, 1       ;dich trai BL 1 bit  ;bit moi them vao ben phai
-        SUB AL, 30h     ;cho nay khong doi thanh AX, vi 1 ky tu vua nhap chi luu o AL thoi
-        ADD BL, AL      
+        convert_so:
+            sub al, 30h
+            jmp done
+        
+        convert_chu:
+            cmp al, 'Z'
+            jbe chu_hoa
+            ja chu_thuong
+            chu_hoa:
+                sub al, 37h
+            chu_thuong:
+                sub al, 57h    
+        
+        done:
+        SHL BX, 4
+        xor ah, ah       
+        add BX, AX      ;chuyen bit tu AX sang BX luu tru  
+
         LOOP nhap
     exit:
         RET
-bin_in ENDP 
+hex_in ENDP 
     
 bin_out PROC
     MOV CX, 16       ;xuat 16 bit trong BL ra man hinh
