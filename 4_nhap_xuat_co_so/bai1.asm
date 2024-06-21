@@ -36,12 +36,6 @@ begin:
     mov ax, so1
     add ax, so2
     mov bx, ax
-    jc overflow    ;CF = 1-> tran
-    overflow:
-        mov ah, 2
-        mov al, 31h
-        lea dl, al
-        int 21h
     call bin_out 
     inchuoi xdong
      
@@ -75,17 +69,13 @@ bin_in PROC
     MOV CX, 16       ;nhap du 16 bit thi dung
     nhap:
         MOV AH, 01h     
-        INT 21h 
-        
-        CMP AL, 0Dh     ;neu la phim enter thi thoi nhap
-        JZ exit         ;neu khong phai enter thi doi sang bit  
+        INT 21h        
         
         SHL BX, 1       ;dich trai BL 1 bit  ;bit moi them vao ben phai
         SUB AL, 30h     ;cho nay khong doi thanh AX, vi 1 ky tu vua nhap chi luu o AL thoi
         ADD BL, AL      
         LOOP nhap
-    exit:
-        RET
+    RET
 bin_in ENDP 
     
 bin_out PROC

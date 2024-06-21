@@ -15,7 +15,7 @@ DSEG SEGMENT
     so1 dw ? 
     so2 dw ? 
     x dw ?
-    y dw ?
+    y dw ? 
 DSEG ENDS 
 
 CSEG SEGMENT
@@ -26,19 +26,18 @@ begin:
     
     inchuoi msg1
     call dec_in    
-    MOV so1, AX 
-    inchuoi xdong 
+    MOV so1, DX 
+    inchuoi xdong
     
     inchuoi msg2
     call dec_in    
-    MOV so2, AX 
+    MOV so2, DX 
     inchuoi xdong
     
     mov ax, so1
     add ax, so2
     mov bx, ax 
     inchuoi msg3
-    XOR AX, AX
     MOV AX, BX 
     CALL dec_out
     inchuoi xdong 
@@ -47,7 +46,6 @@ begin:
     sub ax, so2
     mov bx, ax 
     inchuoi msg4
-    XOR AX, AX
     MOV AX, BX 
     CALL dec_out
     inchuoi xdong  
@@ -56,7 +54,6 @@ begin:
     and ax, so2
     mov bx, ax 
     inchuoi msg5
-    XOR AX, AX
     MOV AX, BX 
     CALL dec_out
     inchuoi xdong 
@@ -65,7 +62,6 @@ begin:
     or ax, so2
     mov bx, ax 
     inchuoi msg6
-    XOR AX, AX
     MOV AX, BX 
     CALL dec_out
     inchuoi xdong 
@@ -74,26 +70,28 @@ begin:
     INT 21h 
 
 dec_in PROC 
-    mov x, 0 
-    mov y, 0
-    mov cx, 2 
+    xor dx, dx
     MOV BX, 10
     
     nhap:
         mov ah, 1
         int 21h 
         
+        cmp al, 0Dh
+        je exit
+        
         sub al, 30h
         xor ah, ah
    
-        mov y, ax
-        mov ax, x
+        mov cl, al
+        mov ax, dx
         mul BX
-        add ax, y
-        mov x, ax          
+        add al, cl
+        mov dx, ax          
         
-        loop nhap  
-    RET
+        jmp nhap
+    exit:  
+        RET
 dec_in ENDP 
 
 dec_out PROC

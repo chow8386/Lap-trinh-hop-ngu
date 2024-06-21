@@ -40,12 +40,6 @@ begin:
     mov ax, so1
     add ax, so2
     mov bx, ax
-    jc overflow    ;CF = 1-> tran
-    overflow:
-        mov ah, 2
-        mov al, 31h
-        lea dl, al
-        int 21h
     call bin_out 
     inchuoi xdong
      
@@ -75,7 +69,7 @@ begin:
 
 hex_in PROC
     MOV BX, 0       ;xoa BL
-    MOV CX, 4       ;lap 2 lan de du 8 bit
+    MOV CX, 4       ;lap 2 lan de du 16 bit
     nhap:
         MOV AH, 01h     
         INT 21h    

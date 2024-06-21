@@ -20,8 +20,8 @@ start:
     sub al, 30h
     mov cl, al
     
+    mov ah, 09   
     lea dx, xdong
-    mov ah, 09
     int 21h
            
     mov ax, 1
@@ -34,14 +34,14 @@ start:
         jbe giaithua   ;bx <= cx
     
     xor cx, cx      
-    lappush:
+    lap:
         xor dx, dx
         div coso
         add dx, 30h
         push dx
         inc cx
         cmp ax, 0
-        jne lappush
+        jne lap
     
     print:
         pop dx
@@ -53,6 +53,77 @@ start:
     int 21h 
 cseg ends
 end start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;9! vuot qua 16 bit nen 8! la max               
 ;16 bit: 0 -> 65535 (2^16 - 1)
