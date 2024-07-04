@@ -1,5 +1,5 @@
 DSEG SEGMENT
-    tenfile db "TT_ASM\data.txt", 0
+    tenfile db "D:\TT_ASM\data.txt", 0
     thefile dw ?
 DSEG ENDS
 
