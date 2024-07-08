@@ -5,7 +5,7 @@ inchuoi macro chuoi
 endm 
 
 dseg segment
-    string db 100, 0, 100 dup (?)  
+    string db 255, 0, 255 dup ('$')  
     tbao1 db 'Nhap 1 chuoi: $'
     tbao2 db 10, 13, 'Dao nguoc: $'
 ends dseg    
@@ -21,7 +21,8 @@ start:
     lea dx, string
     int 21h 
     
-    inchuoi tbao2 
+    inchuoi tbao2
+    xor cx, cx 
     mov cl, [string + 1]
     lea si, string + 2
      
