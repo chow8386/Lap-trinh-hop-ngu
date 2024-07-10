@@ -25,6 +25,7 @@ begin:
     lea dx, max
     int 21h
     cld                 ;chon chieu xu ly chuoi
+    xor cx, cx
     mov cl, len         ;so ky tu can tim
     mov al, 'a'         
     lea di, string      ;(ES:DI)--> dia chi cua chuoi dich  

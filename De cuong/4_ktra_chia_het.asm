@@ -79,6 +79,10 @@ begin:
             pop dx
             mov ah, 02h
             int 21h
-            loop popdx 
+            loop popdx  
+            
+    mov ah, 4ch
+    int 21h
+    
 cseg ends
 end begin

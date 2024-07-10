@@ -57,12 +57,12 @@ dec_in proc
 dec_in endp 
 
 hex_out proc
-    mov cx, 2
-    xuat:
+    mov cx, 4  
+    xuat:   
         push cx     ;luu gia tri CX vao stack
         
         mov cl, 4   ;1 ky tu co 4 bit hex
-        mov dl, bl
+        mov dl, bh
         shr dl, cl  ;dich phai DL 4 bit de lay bit cao nhat cua BH
         
         cmp dl, 09h
