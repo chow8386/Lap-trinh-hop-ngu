@@ -5,7 +5,7 @@ inchuoi macro chuoi
 endm 
 
 dseg segment   
-    tbao1 db "Nhap chuoi so (1,2,3): $"
+    tbao1 db "Nhap chuoi so (1,2,-3): $"
     tbao2 db 10, 13, "So luong so chia het cho 5: $"
     string db 100 dup ("$") 
     dem dw 0
@@ -36,7 +36,9 @@ begin:
         cmp dl, 0Dh
         je ktra_chia_het
         cmp dl, ','
-        je ktra_chia_het
+        je ktra_chia_het 
+        cmp dl, '-'
+        je next
         mul bx
         mov dx, [si] 
         mov dh, 0
@@ -46,9 +48,7 @@ begin:
         jmp xu_ly 
         
     ktra_chia_het:
-        mov num, ax
-        mov ax, num
-        mov dx, 0
+        xor dx, dx
         mov bx, 5       ;chia het cho 5
         div bx
         cmp dx, 0       ;kiem tra so du
@@ -66,6 +66,7 @@ begin:
     print:   
         xor cx, cx 
         mov ax, dem
+        mov bx, 10
         pushdx: 
             mov dx, 0
             div bx
