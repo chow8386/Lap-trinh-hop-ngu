@@ -29,7 +29,10 @@ begin:
     
     inchuoi tbao3
     mov bl, so
-    call bin_out
+    call bin_out 
+    
+    mov ah, 4ch
+    int 21h
      
 dec_in proc 
     xor dx, dx
@@ -77,7 +80,7 @@ hex_out proc
         inra:
             mov ah, 02h 
             int 21h
-            shl bx, cl  ;quay trai BX 4 bit
+            shl bx, cl  ;dich trai BX 4 bit
             pop cx
             loop xuat
     ret

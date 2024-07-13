@@ -26,8 +26,8 @@ begin:
     inchuoi tbao2
 
     mov cx, 0
-    mov cl, [str + 1]  ; chuyen do dai cua chuoi vao cl
-    lea si, [str + 2]  ; lay dia chi ky tu dau tien luu vao si
+    mov cl, str + 1  ; chuyen do dai cua chuoi vao cl
+    lea si, str + 2  ; lay dia chi ky tu dau tien luu vao si
     mov bx, 10
     mov ax, 0
     mov sum, ax 

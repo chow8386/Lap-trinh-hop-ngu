@@ -31,10 +31,8 @@ start:
     giaithua:
         mul bx          ;kq luu o ax
         inc bx
-        cmp bx, cx 
-        jbe giaithua    ;bx <= cx
-    
-    xor cx, cx      
+        loop giaithua    ;bx <= cx
+        
     convert:
         xor dx, dx
         div coso

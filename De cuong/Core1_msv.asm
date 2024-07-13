@@ -27,21 +27,21 @@ begin:
         
         mov cl, chuoi + 1
         cmp cx, 8
-        jne nhap
+        jne saikq
 
     lea si, chuoi + 2
     lea di, msv
     repe cmpsb       ;chuoi bang nhau ZF se dc thiet lap
-    jne nhap
     je print
-    inchuoi tbao2
-    jmp exit
+    
+    saikq:
+        inchuoi tbao2
+        jmp nhap
     
     print:
         inchuoi hoten  
-    
-    exit:
-        mov ah, 4ch
-        int 21h
+
+    mov ah, 4ch
+    int 21h
 cseg ends
 end begin

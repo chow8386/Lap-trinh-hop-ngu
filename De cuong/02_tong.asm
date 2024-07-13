@@ -25,8 +25,8 @@ begin:
     inchuoi tbao2
     
     mov cx, 0
-    mov cl, [str + 1]
-    lea si, [str + 2]
+    mov cl, str + 1
+    lea si, str + 2
     mov bx, 10
     mov ax, 0
     kiem_tra:
