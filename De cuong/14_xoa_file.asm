@@ -27,7 +27,7 @@ begin:
     mov cl, len
     lea bx, tenfile         ;con tro o dau chuoi
     add bx, cx              ;+cx de dua con tro ve cuoi
-    mov byte ptr [bx], 0    ;them 0 vao cuoi
+    mov [bx], 0    ;them 0 vao cuoi
     
     mov ah, 41h
     lea dx, tenfile

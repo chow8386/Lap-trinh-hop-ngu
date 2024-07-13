@@ -33,7 +33,7 @@ begin:
     mov cl, old_len
     lea bx, oldfile         ;con tro o dau chuoi
     add bx, cx              ;+cx de dua con tro ve cuoi
-    mov byte ptr [bx], 0    ;them 0 vao cuoi
+    mov [bx], 0    ;them 0 vao cuoi
     
     inchuoi tbao2
     mov ah, 0Ah
