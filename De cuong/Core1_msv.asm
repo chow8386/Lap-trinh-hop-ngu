@@ -5,7 +5,7 @@ inchuoi macro chuoi
 endm
 
 dseg segment
-    tbao1 db "Nhap ma sinh vien: $" 
+    tbao1 db 10, 13, "Nhap ma sinh vien: $" 
     tbao2 db 10, 13, "Sai ma sinh vien!$"  
     hoten db 10, 13, "Le Minh Chau$" 
     msv db "AT180207" 
@@ -17,17 +17,22 @@ assume: cs:cseg, ds:dseg, es:dseg
 begin:   
     mov ax, dseg
     mov ds, ax
-    mov es, ax    
-    
-    inchuoi tbao1 
-    mov ah, 0Ah
-    lea dx, chuoi
-    int 21h 
-    
-    mov cx, 8
+    mov es, ax  
+      
+    nhap:
+        inchuoi tbao1 
+        mov ah, 0Ah
+        lea dx, chuoi
+        int 21h 
+        
+        mov cl, chuoi + 1
+        cmp cx, 8
+        jne nhap
+
     lea si, chuoi + 2
     lea di, msv
     repe cmpsb       ;chuoi bang nhau ZF se dc thiet lap
+    jne nhap
     je print
     inchuoi tbao2
     jmp exit

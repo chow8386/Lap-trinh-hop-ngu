@@ -5,10 +5,10 @@ inchuoi macro chuoi
 endm   
 
 dseg segment
-    tbao1 db "Nhap ho ten: $"   
+    tbao1 db 10, 13, "Nhap ho ten: $"   
     tbao2 db 10, 13, "Sai ho ten!$"  
     hoten db "Le Minh Chau" 
-    msv db 10, 13, "AT180207" 
+    msv db 10, 13, "AT180207$" 
     chuoi db 100 dup ('$')
 dseg ends
 
@@ -19,15 +19,20 @@ begin:
     mov ds, ax
     mov es, ax    
     
-    inchuoi tbao1 
-    mov ah, 0Ah
-    lea dx, chuoi
-    int 21h 
+    nhap:
+        inchuoi tbao1 
+        mov ah, 0Ah
+        lea dx, chuoi
+        int 21h  
+        
+        mov cl, chuoi + 1
+        cmp cx, 12
+        jne nhap
     
-    mov cx, 8
     lea si, chuoi + 2
     lea di, hoten
     repe cmpsb       ;chuoi bang nhau ZF se dc thiet lap
+    jne nhap
     je print
     inchuoi tbao2
     jmp exit
