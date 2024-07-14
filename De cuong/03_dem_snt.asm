@@ -25,7 +25,7 @@ begin:
     
     inchuoi tbao2
     
-    lea si, [string + 2]
+    lea si, string + 2
     mov bx, 10
     mov ax, 0  
     mov cx, 2
@@ -51,13 +51,16 @@ begin:
         calc:  
             mov ax, num     ;< 2
             cmp ax, 2
-            jb next            
+            jb next     
+                   
             cmp cx, ax      ;=2
-            je endnum       
+            je endnum             
+            
             mov dx, 0       ;2-> n: nghiem != n thi kp snt        
             div cx
             cmp dx, 0       ;du luu o dx, du 0 la chia het
-            je next
+            je next   
+            
             inc cx
             jmp calc        
             

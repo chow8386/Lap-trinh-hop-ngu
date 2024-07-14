@@ -28,3 +28,22 @@ begin:
     int 21h   
 end begin 
 cseg ends
+          
+;khai bao 34 dup vi
+    ;cuoi chuoi phai ket thuc $ thi ham 09h moi chay   
+    
+;thay CLD thanh STD 
+    ;CLD: tu thap den cao
+    ;STD: tu cao den thap, SI DI giam
+    ;sau lan lap REP MOVSB dau tien, con tro giam ve vitri 0
+    ;nen chi in ra moi K 
+    
+;thay MOVSB thanh MOVSW thi 
+    ;phai them MOVSB de di chuyen 1 byte le 
+    ;va sua mov cx, 16     
+    
+;thay MOVSB bang lenh
+    ;copy_loop:
+    ;lodsb ; Load byte tu DS:SI vao AL, tang SI
+    ;stosb ; Luu byte tu AL vào ES:DI, tang DI
+    ;loop copy_loop

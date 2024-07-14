@@ -17,7 +17,7 @@ assume: cs:cseg, ds:dseg, es:dseg
 begin:   
     mov ax, dseg
     mov ds, ax
-    mov es, ax    
+    mov es, ax     
     
     nhap:
         inchuoi tbao1 

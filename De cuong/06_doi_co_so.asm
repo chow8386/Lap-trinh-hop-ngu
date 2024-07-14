@@ -5,7 +5,7 @@ inchuoi macro chuoi
 endm 
 
 dseg segment   
-    so db ?
+    so dw ?
     tbao1 db 'DEC: $'  
     tbao2 db 10, 13, 'HEX: $'  
     tbao3 db 10, 13, 'BIN: $'    
@@ -19,16 +19,16 @@ begin:
     
     inchuoi tbao1
     call dec_in 
-    mov so, dl 
+    mov so, dx 
     
     inchuoi tbao2
-    mov bl, so
+    mov bx, so
     call hex_out
     
     xor bx, bx 
     
     inchuoi tbao3
-    mov bl, so
+    mov bx, so
     call bin_out 
     
     mov ah, 4ch
@@ -51,7 +51,7 @@ dec_in proc
         mov cl, al
         mov ax, dx
         mul bx
-        add al, cl
+        add ax, cx
         mov dx, ax          
         
         jmp nhap
@@ -66,7 +66,7 @@ hex_out proc
         
         mov cl, 4   ;1 ky tu co 4 bit hex
         mov dl, bh
-        shr dl, cl  ;dich phai DL 4 bit de lay bit cao nhat cua BH
+        shr dl, cl  ;dich phai DL 4 bit de lay bit cua BH
         
         cmp dl, 09h
         ja kytu         ; >9 thi doi thanh chu

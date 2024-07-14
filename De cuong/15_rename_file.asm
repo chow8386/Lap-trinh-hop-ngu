@@ -44,7 +44,7 @@ begin:
     mov cl, new_len
     lea bx, newfile         ;con tro o dau chuoi
     add bx, cx              ;+cx de dua con tro ve cuoi
-    mov byte ptr [bx], 0    ;them 0 vao cuoi
+    mov [bx], 0    ;them 0 vao cuoi
     
     mov ah, 56h             ;doi ten file
     lea dx, oldfile

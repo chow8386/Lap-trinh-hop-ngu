@@ -29,11 +29,11 @@ begin:
     add bx, cx              ;+cx de dua con tro ve cuoi
     mov [bx], 0    ;them 0 vao cuoi
     
-    mov ah, 41h
+    mov ah, 41h             ;xoa file
     lea dx, tenfile
     int 21h
     
-    mov ah, 3eh             ;xoa file
+    mov ah, 3eh             
     mov bx, thefile
     int 21h  
     

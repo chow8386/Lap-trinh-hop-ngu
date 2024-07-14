@@ -23,7 +23,7 @@ start:
     
     inchuoi tbao2
     xor cx, cx 
-    mov cl, [string + 1]
+    mov cl, string + 1
     lea si, string + 2
      
     reverse:
@@ -31,7 +31,7 @@ start:
         inc si
         loop reverse
     
-    mov cl, [string + 1]
+    mov cl, string + 1
     print:
         pop dx
         mov ah, 02h

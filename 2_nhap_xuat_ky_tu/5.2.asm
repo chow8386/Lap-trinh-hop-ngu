@@ -19,7 +19,7 @@ start:
 input_loop:
     mov ah, 01h        
     int 21h            
-    mov [si], al       
+    mov [si], al   ;lưu giá trị của al vào địa chỉ bộ nhớ thanh ghi si    
     inc si            
     loop input_loop    
 
